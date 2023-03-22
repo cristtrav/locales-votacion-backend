@@ -1,9 +1,11 @@
 import { Local } from '@database/entity/local.entity';
 import { Votante } from '@database/entity/votante.entity';
+import { VotanteView } from '@database/views/votante.view';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { VotanteModule } from './modules/votante/votante.module';
 
 @Module({
   imports: [
@@ -15,10 +17,11 @@ import { AppService } from './app.service';
       username: process.env.PGUSER,
       password: process.env.PGPASSWORD,
       entities: [
-        Local, Votante
+        Local, Votante, VotanteView
       ]
 
-    })
+    }),
+    VotanteModule
   ],
   controllers: [AppController],
   providers: [AppService],
