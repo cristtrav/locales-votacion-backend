@@ -36,3 +36,7 @@ lerna-debug.log*
 
 # Env file
 .env
+
+# Frontend Client files
+client
+client/*

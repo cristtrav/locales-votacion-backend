@@ -4,13 +4,19 @@ import { Votante } from '@database/entity/votante.entity';
 import { VotanteView } from '@database/views/votante.view';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { VotanteModule } from './modules/votantes/votantes.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({         
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/api/(.*)']
+    }),
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot({
       type: 'postgres',
