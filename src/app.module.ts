@@ -10,6 +10,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { VotanteModule } from './modules/votantes/votantes.module';
+import { LocalesModule } from './modules/locales/locales.module';
+import { ResumenLocalView } from '@database/views/resumen-local.view';
 
 @Module({
   imports: [
@@ -27,10 +29,11 @@ import { VotanteModule } from './modules/votantes/votantes.module';
       password: process.env.PGPASSWORD,
       synchronize: false,
       entities: [
-        Local, Votante, VotanteView, VotanteLocal
+        Local, Votante, VotanteView, VotanteLocal, ResumenLocalView
       ]
     }),
-    VotanteModule
+    VotanteModule,
+    LocalesModule
   ],
   controllers: [AppController],
   providers: [AppService],
