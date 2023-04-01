@@ -51,8 +51,11 @@ export class VotanteService {
         return votante;
     }
 
-    async findPosiblesByCi(ci: number): Promise<Votante[]> {
-        return await (await this.votanteLocalRepo.find({ where: { ciVotanteCarga: ci }, relations: { votante: true } })).map(vl => vl.votante)
+    async findPosiblesByCi(ci: number): Promise<VotanteView[]> {
+        const votantesLocales = await this.votanteLocalRepo.findBy({ciVotanteCarga: ci});
+        return this.votanteViewRepo.createQueryBuilder('votante')
+        .where(`votante.ci IN (:...civotantes)`, {civotantes: votantesLocales.map(vl => vl.ciVotante)})
+        .getMany();
     }
 
     async add(ciVotanteCarga: number, ciVotante: number) {

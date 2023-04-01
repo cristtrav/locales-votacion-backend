@@ -28,7 +28,7 @@ export class VotantesController {
     @Get(':ci/posibles')
     getPosibles(
         @Param('ci') ci: number
-    ): Promise<Votante[]>{
+    ): Promise<VotanteView[]>{
         return this.votantesSrv.findPosiblesByCi(ci);
     }
 
