@@ -16,4 +16,7 @@ export class VotanteView{
 
     @ViewColumn()
     local: string;
+
+    @ViewColumn()
+    agregado: boolean;
 }

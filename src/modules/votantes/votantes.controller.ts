@@ -14,7 +14,7 @@ export class VotantesController {
     @Get()
     findAll(
         @Query() queries: {[name: string]: any}
-    ): Promise<Votante[]>{
+    ): Promise<VotanteView[]>{
         return this.votantesSrv.findAll(queries);
     }
 

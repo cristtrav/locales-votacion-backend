@@ -17,11 +17,11 @@ export class VotanteService {
         private votanteLocalRepo: Repository<VotanteLocal>
     ) { }
 
-    private getSelectQuery(queries: { [name: string]: any }): SelectQueryBuilder<Votante> {
+    private getSelectQuery(queries: { [name: string]: any }): SelectQueryBuilder<VotanteView> {
         const { sort, offset, limit, search } = queries;
-        let query = this.votanteRepo.createQueryBuilder('votante');
-        const patronBusquedaNombres = `%${this.quitarAcentos(search).replaceAll(' ', '% %').toUpperCase()}%`;
+        let query = this.votanteViewRepo.createQueryBuilder('votante');
         if (search) {
+            const patronBusquedaNombres = `%${this.quitarAcentos(search).replaceAll(' ', '% %').toUpperCase()}%`;
             query = query.andWhere(new Brackets(qb => {
                 if (!Number.isNaN(Number.parseInt(search))) qb = qb.orWhere(`votante.ci = :ci`, { ci: Number.parseInt(search) });
                 qb = qb.orWhere(`CONCAT(UPPER(votante.nombres), ' ', UPPER(votante.apellidos)) LIKE :razonsocial`, { razonsocial: patronBusquedaNombres });
@@ -37,7 +37,7 @@ export class VotanteService {
         return query;
     }
 
-    findAll(queries: { [name: string]: any }): Promise<Votante[]> {
+    findAll(queries: { [name: string]: any }): Promise<VotanteView[]> {
         return this.getSelectQuery(queries).getMany();
     }
 
