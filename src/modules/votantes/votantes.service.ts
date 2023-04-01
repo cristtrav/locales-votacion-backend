@@ -53,6 +53,7 @@ export class VotanteService {
 
     async findPosiblesByCi(ci: number): Promise<VotanteView[]> {
         const votantesLocales = await this.votanteLocalRepo.findBy({ciVotanteCarga: ci});
+        if(votantesLocales.length === 0) return [];
         return this.votanteViewRepo.createQueryBuilder('votante')
         .where(`votante.ci IN (:...civotantes)`, {civotantes: votantesLocales.map(vl => vl.ciVotante)})
         .getMany();
@@ -77,7 +78,7 @@ export class VotanteService {
         .replaceAll(/[áÁ]/g, 'A')
         .replaceAll(/[éÉ]/g, 'E')
         .replaceAll(/[íÍ]/g, 'I')
-        .replaceAll(/[oÓ]/g, 'O')
+        .replaceAll(/[óÓ]/g, 'O')
         .replaceAll(/[úÚ]/g, 'U');
     }
 }
