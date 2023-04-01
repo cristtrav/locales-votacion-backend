@@ -20,12 +20,12 @@ export class VotanteService {
     private getSelectQuery(queries: { [name: string]: any }): SelectQueryBuilder<Votante> {
         const { sort, offset, limit, search } = queries;
         let query = this.votanteRepo.createQueryBuilder('votante');
-        const patronBusquedaNombres = `%${this.quitarAcentos(search).replaceAll(' ', '%').toUpperCase()}%`
+        const patronBusquedaNombres = `%${this.quitarAcentos(search).replaceAll(' ', '% %').toUpperCase()}%`;
         if (search) {
             query = query.andWhere(new Brackets(qb => {
                 if (!Number.isNaN(Number.parseInt(search))) qb = qb.orWhere(`votante.ci = :ci`, { ci: Number.parseInt(search) });
-                qb = qb.orWhere(`CONCAT(UPPER(votante.nombres), ' ', UPPER(votante.apellidos)) LIKE :razonsocial`, { razonsocial: patronBusquedaNombres })
-            }))
+                qb = qb.orWhere(`CONCAT(UPPER(votante.nombres), ' ', UPPER(votante.apellidos)) LIKE :razonsocial`, { razonsocial: patronBusquedaNombres });
+            }));
         }
         if (offset) query = query.skip(offset);
         if (limit) query = query.take(limit);
