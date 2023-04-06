@@ -12,5 +12,14 @@ export class Votante{
     apellidos: string
 
     @Column({name: 'id_local',nullable: false})
-    idLocal: number;
+    idlocal: number;
+
+    @Column({name: 'id_zona', nullable: false})
+    idzona: number;
+
+    @Column({name: 'id_distrito', nullable: false})
+    iddistrito: number;
+
+    @Column({name: 'id_departamento', nullable: false})
+    iddepartamento: number;
 }

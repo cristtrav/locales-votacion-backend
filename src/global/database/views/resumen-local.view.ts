@@ -4,12 +4,30 @@ import { ViewColumn, ViewEntity } from "typeorm";
 export class ResumenLocalView{
 
     @ViewColumn()
-    id: number;
+    cantidad: number;
+    
+    @ViewColumn()
+    idlocal: number;
 
     @ViewColumn()
     local: string;
 
     @ViewColumn()
-    cantidad: number;
+    idzona: number;
+
+    @ViewColumn()
+    zona: string;
+
+    @ViewColumn()
+    iddistrito: number;
+
+    @ViewColumn()
+    distrito: string;
+
+    @ViewColumn()
+    iddepartamento: number;
+
+    @ViewColumn()
+    departamento: string;
 
 }
