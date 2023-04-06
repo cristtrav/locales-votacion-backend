@@ -12,6 +12,12 @@ import { AppService } from './app.service';
 import { VotanteModule } from './modules/votantes/votantes.module';
 import { LocalesModule } from './modules/locales/locales.module';
 import { ResumenLocalView } from '@database/views/resumen-local.view';
+import { Departamento } from '@database/entity/departamento.entity';
+import { DepartamentosModule } from './modules/departamentos/departamentos.module';
+import { DistritosModule } from './modules/distritos/distritos.module';
+import { Distrito } from '@database/entity/distrito.entity';
+import { ZonasModule } from './modules/zonas/zonas.module';
+import { Zona } from '@database/entity/zona.entity';
 
 @Module({
   imports: [
@@ -29,11 +35,21 @@ import { ResumenLocalView } from '@database/views/resumen-local.view';
       password: process.env.PGPASSWORD,
       synchronize: false,
       entities: [
-        Local, Votante, VotanteView, VotanteLocal, ResumenLocalView
+        Local,
+        Votante,
+        VotanteView,
+        VotanteLocal,
+        ResumenLocalView,
+        Departamento,
+        Distrito,
+        Zona
       ]
     }),
     VotanteModule,
-    LocalesModule
+    LocalesModule,
+    DepartamentosModule,
+    DistritosModule,
+    ZonasModule
   ],
   controllers: [AppController],
   providers: [AppService],

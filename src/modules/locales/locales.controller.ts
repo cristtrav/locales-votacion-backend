@@ -1,5 +1,5 @@
 import { ResumenLocalView } from '@database/views/resumen-local.view';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { LocalesService } from './locales.service';
 
 @Controller('locales')
@@ -10,8 +10,10 @@ export class LocalesController {
     ){}
 
     @Get('resumen')
-    findAllResumen(): Promise<ResumenLocalView[]>{
-        return this.localesSrv.findAllResumen();
+    findAllResumen(
+        @Query() queries: {[name: string]: any}
+    ): Promise<ResumenLocalView[]>{
+        return this.localesSrv.findAllResumen(queries);
     }
 
 }
