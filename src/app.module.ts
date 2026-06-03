@@ -43,7 +43,9 @@ import { Zona } from '@database/entity/zona.entity';
         Departamento,
         Distrito,
         Zona
-      ]
+      ],
+      migrationsTableName: 'public.migrations',
+      migrations: [__dirname + '/global/database/migrations/*{.ts,.js}']
     }),
     VotanteModule,
     LocalesModule,
